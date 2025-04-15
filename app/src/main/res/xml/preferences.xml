@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:robobunny="http://robobunny.com">
+
+    <PreferenceCategory android:title="@string/pref_section_display">
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="filter_data"
+            android:summary="@string/pref_filter_data_summary"
+            android:title="@string/pref_filter_data_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="show_bat_details"
+            android:summary="@string/pref_show_bat_details_summary"
+            android:title="@string/pref_show_bat_details_title" />
+
+        <PreferenceScreen android:title="@string/pref_section_customize_views">
+            <ListPreference
+                android:defaultValue="16"
+                android:entries="@array/mediumFontSizeLabels"
+                android:entryValues="@array/mediumFontSizeValues"
+                android:key="medium_font_size"
+                android:summary=""
+                android:title="@string/medium_font_size_title" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="force_en"
+                android:summary="@string/pref_force_en_summary"
+                android:title="@string/pref_force_en_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_from_to_ref"
+                android:summary="@string/pref_show_from_to_ref_summary"
+                android:title="@string/pref_show_from_to_ref_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_other_wifi"
+                android:summary="@string/pref_show_other_wifi_summary"
+                android:title="@string/pref_show_other_wifi_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_other_signal"
+                android:summary="@string/pref_show_other_signal_summary"
+                android:title="@string/pref_show_other_signal_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_other_screen_brightness"
+                android:summary="@string/pref_show_other_screen_brightness_summary"
+                android:title="@string/pref_show_other_screen_brightness_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_other_connection"
+                android:summary="@string/pref_show_other_connection_summary"
+                android:title="@string/pref_show_other_connection_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_other_bt"
+                android:summary="@string/pref_show_other_bt_summary"
+                android:title="@string/pref_show_other_bt_title" />
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="show_other_doze"
+                android:summary="@string/pref_show_other_doze_summary"
+                android:title="@string/pref_show_other_doze_title" />
+        </PreferenceScreen>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_section_defaults">
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/statLabels"
+            android:entryValues="@array/statValues"
+            android:key="default_stat"
+            android:summary="@string/pref_default_stat_summary"
+            android:title="@string/pref_default_stat_title" />
+        <ListPreference
+            android:defaultValue="ref_unplugged"
+            android:entries="@array/statTypeLabels"
+            android:entryValues="@array/statTypeValues"
+            android:key="default_stat_type"
+            android:summary="@string/pref_default_stat_type_summary"
+            android:title="@string/pref_default_stat_type_title" />
+        <PreferenceScreen android:title="@string/pref_section_sharing">
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="save_as_text"
+                android:summary="@string/pref_save_dumpfile_summary"
+                android:title="@string/pref_save_dumpfile_title" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="save_logcat"
+                android:summary="@string/pref_save_logcat_summary"
+                android:title="@string/pref_save_logcat_title" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="save_dmesg"
+                android:summary="@string/pref_save_dmesg_summary"
+                android:title="@string/pref_save_dmesg_title" />
+        </PreferenceScreen>
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="auto_refresh"
+            android:summary="@string/pref_auto_refresh_summary"
+            android:title="@string/pref_auto_refresh_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_screen_widgets_title">
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/statLabels"
+            android:entryValues="@array/statValues"
+            android:key="widget_default_stat"
+            android:summary="@string/widget_default_stat_summary"
+            android:title="@string/widget_default_stat_title" />
+        <ListPreference
+            android:defaultValue="ref_boot"
+            android:entries="@array/statTypeLabels"
+            android:entryValues="@array/statTypeValues"
+            android:key="widget_fallback_stat_type"
+            android:summary="@string/widget_fallback_stat_type_summary"
+            android:title="@string/widget_fallback_stat_type_title" />
+        <ListPreference
+            android:defaultValue="ref_unplugged"
+            android:entries="@array/statTypeLabels"
+            android:entryValues="@array/statTypeValues"
+            android:key="new_widget_default_stat_type"
+            android:summary="@string/widget_default_stat_type_summary"
+            android:title="@string/widget_default_stat_type_title" />
+
+        <com.asksven.betterbatterystats.contrib.SeekBarPreference
+            android:defaultValue="80"
+            android:key="new_widget_bg_opacity"
+            android:max="100"
+            android:summary="@string/widget_opacity_summary"
+            android:title="@string/widget_opacity_title"
+            robobunny:interval="10"
+            robobunny:min="10"
+            robobunny:unitsLeft=""
+            robobunny:unitsRight="%" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="text_widget_color"
+            android:summary="@string/widget_show_text_color_summary"
+            android:title="@string/widget_show_text_color_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="widget_show_pct"
+            android:summary="@string/large_widget_show_pct_summary"
+            android:title="@string/large_widget_show_pct_title" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_section_misc">
+
+        <PreferenceScreen android:title="@string/pref_section_watchdog">
+            <CheckBoxPreference
+                android:defaultValue="true"
+                android:key="watchdog_on_unlock"
+                android:summary="@string/pref_watchdog_on_unlock_summary"
+                android:title="@string/pref_watchdog_on_unlock_title" />
+
+            <PreferenceCategory android:key="warnings" android:title="@string/pref_section_warnings">
+                <com.asksven.betterbatterystats.contrib.SeekBarPreference
+                    android:defaultValue="30"
+                    android:key="watchdog_awake_threshold"
+                    android:max="100"
+                    android:summary="@string/pref_watchdog_awake_threshold_summary"
+                    android:title="@string/pref_watchdog_awake_threshold_title"
+                    robobunny:interval="10"
+                    robobunny:min="0"
+                    robobunny:unitsLeft=""
+                    robobunny:unitsRight="%" />
+                <com.asksven.betterbatterystats.contrib.SeekBarPreference
+                    android:defaultValue="10"
+                    android:key="watchdog_duration_threshold"
+                    android:max="30"
+                    android:summary="@string/pref_ref_for_screen_off_summary"
+                    android:title="@string/pref_ref_for_screen_off_title"
+                    robobunny:interval="1"
+                    robobunny:min="0"
+                    robobunny:unitsLeft=""
+                    robobunny:unitsRight="Min." />
+            </PreferenceCategory>
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_section_active_mon">
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="active_mon_enabled"
+                android:summary="@string/pref_active_mon_enabled_summary"
+                android:title="@string/pref_active_mon_enabled_title" />
+
+            <com.asksven.betterbatterystats.contrib.SeekBarPreference
+                android:defaultValue="60"
+                android:key="active_mon_freq"
+                android:max="240"
+                android:summary="@string/pref_active_mon_freq_summary"
+                android:title="@string/pref_active_mon_freq_title"
+                robobunny:interval="30"
+                robobunny:min="30"
+                robobunny:unitsLeft=""
+                robobunny:unitsRight="Min." />
+        </PreferenceScreen>
+        <PreferenceScreen android:title="@string/pref_section_advanced">
+            <ListPreference
+                android:defaultValue="0"
+                android:entries="@array/themeLabels"
+                android:entryValues="@array/themeValues"
+                android:key="theme"
+                android:summary="@string/pref_theme_summary"
+                android:title="@string/pref_theme_title" />
+
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="debug_logging"
+                android:summary="@string/pref_debug_logging_summary"
+                android:title="@string/pref_debug_logging_title" />
+
+            <com.asksven.betterbatterystats.contrib.SeekBarPreference
+                android:defaultValue="100"
+                android:key="battery_charged_minimum_threshold"
+                android:max="100"
+                android:summary="@string/pref_charged_trigger_percentage_summary"
+                android:title="@string/pref_charged_trigger_percentage_title"
+                robobunny:interval="1"
+                robobunny:min="0"
+                robobunny:unitsLeft=""
+                robobunny:unitsRight="%" />
+            <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="developer"
+                android:summary="@string/pref_developer_summary"
+                android:title="@string/pref_developer_title" />
+
+            <PreferenceScreen
+                android:summary="@string/pref_screen_permissions_summary"
+                android:title="@string/pref_screen_permissions_title">
+                <intent android:action="com.asksven.betterbatterystats.SystemAppActivity" />
+            </PreferenceScreen>
+            <PreferenceScreen
+                android:summary="@string/pref_screen_import_export_summary"
+                android:title="@string/pref_screen_import_export_title">
+                <intent android:action="com.asksven.betterbatterystats.ImportExportPreferencesActivity" />
+            </PreferenceScreen>
+            <PreferenceScreen
+                android:summary="@string/pref_screen_diagnostics_summary"
+                android:title="@string/pref_screen_diagnostics_title">
+                <intent android:action="com.asksven.betterbatterystats.DiagnosticsActivity" />
+            </PreferenceScreen>
+        </PreferenceScreen>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

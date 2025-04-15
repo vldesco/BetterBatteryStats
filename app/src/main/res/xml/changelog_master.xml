@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release version="3.4.0" versioncode="108">
+        <change>Initial prep for Andrid 14. Will not work yet!!!</change>
+    </release>
+</changelog>

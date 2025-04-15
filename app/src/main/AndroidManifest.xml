@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.asksven.betterbatterystats"
+    android:installLocation="internalOnly">
+
+
+    <!-- these are static, we can not ask users for these -->
+
+    <uses-permission android:name="android.permission.DUMP"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.BATTERY_STATS"
+        tools:ignore="ProtectedPermissions" />
+
+    <!-- permission to access su -->
+    <uses-permission android:name="android.permission.ACCESS_SUPERUSER" />
+
+
+    <!-- required for writing dump files -->
+    <!-- required by M-preview -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- required by HockeyApp -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- store kernel wakelock ref boot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- detect  when screen is turned on/off -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- detect  when screen is turned on/off required on TIRAMISU -->
+    <uses-permission android:name="android.permission.READ_BASIC_PHONE_STATE" />
+    <uses-permission android:name="android.permission.DEVICE_POWER"
+        tools:ignore="ProtectedPermissions" />
+    <!-- <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" /> -->
+
+    <!-- retrieve ps list (running tasks) -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <!-- tentative to fix bug #173 -->
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <!-- need to hold wakelocks for writing operations -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- needed starting with SDK 28 -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Attempt to narrow down the A13 Samsung issue -->
+    <uses-permission android:name="android.permission.READ_PRECISE_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
+    <uses-permission android:name="android.permission.QUERY_USERS" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true" />
+
+    <uses-feature
+        android:name="android.software.app_widgets"
+        android:required="true" />
+
+
+    <application
+        android:name=".BbsApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="BBS"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Bbs.Auto">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
+
+        <activity
+            android:name=".StatsActivity"
+            android:configChanges="orientation|screenSize"
+            android:label="BetterBatteryStats"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".AboutActivity"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+        <activity
+            android:name=".CreditsActivity"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+        <activity
+            android:name=".ChangeLogActivity"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+
+        <activity
+            android:name=".ImportExportPreferencesActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.asksven.betterbatterystats.ImportExportPreferencesActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".SystemAppActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.asksven.betterbatterystats.SystemAppActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".DiagnosticsActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.asksven.betterbatterystats.DiagnosticsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".RawStatsActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+        <activity
+            android:name=".PackageInfoActivity"
+            android:configChanges="orientation"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+        <activity
+            android:name=".GraphActivity"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+        <activity
+            android:name=".PreferencesFragmentActivity"
+            android:parentActivityName=".StatsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.asksven.betterbatterystats.StatsActivity" />
+        </activity>
+
+        <activity
+            android:name=".DashClockSettingsActivity"
+            android:exported="true"
+            android:label="Settings"
+            />
+
+<!--        <activity-->
+<!--            android:name=".localeplugin.ui.EditActivity"-->
+<!--            android:exported="true"-->
+<!--            android:label="@string/plugin_name"-->
+<!--            android:theme="@style/Theme.AppCompat"-->
+<!--            android:uiOptions="splitActionBarWhenNarrow"-->
+<!--            android:icon="@mipmap/ic_launcher">-->
+<!--            &lt;!&ndash; this Intent filter allows the plug-in to be discovered by the host. &ndash;&gt;-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.twofortyfouram.locale.intent.action.EDIT_SETTING" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+
+        <!--
+             This is the "fire" BroadcastReceiver. Note that Locale will reject plug-in BroadcastReceivers for the following reasons:
+                - The BroadcastReceiver isn't exported (e.g. android:exported="false")
+                - The BroadcastReceiver isn't enabled (e.g. android:enabled="false")
+                - The BroadcastReceiver requires permissions not available to Locale
+                - There are multiple BroadcastReceivers for com.twofortyfouram.locale.intent.action.FIRE_SETTING
+        -->
+<!--        <receiver-->
+<!--            android:name=".localeplugin.receiver.FireReceiver"-->
+<!--            android:exported="true"-->
+<!--            android:process=":background"-->
+<!--            tools:ignore="ExportedReceiver">-->
+
+<!--            &lt;!&ndash; this Intent filter allows the plug-in to discovered by Locale &ndash;&gt;-->
+<!--            <intent-filter>-->
+<!--                <action android:name="com.twofortyfouram.locale.intent.action.FIRE_SETTING" />-->
+<!--            </intent-filter>-->
+<!--        </receiver>-->
+
+        <receiver
+            android:name=".handlers.OnBootHandler"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver
+            android:name=".widgetproviders.AppWidget"
+            android:label="BBS Widget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_OPTIONS_CHANGED" />
+                <action android:name="BBS_WIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_provider" />
+        </receiver>
+
+        <receiver
+            android:name=".widgetproviders.TextAppWidget"
+            android:label="BBS Text Widget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.APPWIDGET_OPTIONS_CHANGED" />
+                <action android:name="BBS_WIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/text_widget_provider" />
+        </receiver>
+
+        <!--
+        <service android:name=".services.UpdateLargeWidgetService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".services.UpdateMediumWidgetService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".services.UpdateSmallWidgetService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        -->
+        <service android:name=".services.UpdateWidgetService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".services.UpdateTextWidgetService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+
+        <service android:name=".services.AppWidgetJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:name=".services.EventWatcherService" />
+        <service android:name=".services.WriteUnpluggedReferenceService" />
+        <service android:name=".services.WriteCustomReferenceService" />
+        <service android:name=".services.WriteCurrentReferenceService" />
+        <service android:name=".services.WriteDumpfileService" />
+        <service android:name=".services.WriteScreenOffReferenceService" />
+        <service android:name=".services.WriteTimerReferenceService" />
+        <service android:name=".services.WriteScreenOnReferenceService" />
+        <service android:name=".services.WriteBootReferenceService" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".services.WriteTimeSeriesService" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".services.WatchdogProcessingService" />
+        <service
+            android:name=".services.BbsDashClockExtension"
+            android:icon="@drawable/ic_stat_notification"
+            android:label="BetterBatteryStats"
+            android:permission="com.google.android.apps.dashclock.permission.READ_EXTENSION_DATA"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.apps.dashclock.Extension" />
+            </intent-filter>
+
+            <meta-data
+                android:name="protocolVersion"
+                android:value="2" />
+            <meta-data
+                android:name="worldReadable"
+                android:value="true" />
+            <meta-data
+                android:name="description"
+                android:value="Show info about awake times and drain per hour" />
+            <meta-data
+                android:name="settingsActivity"
+                android:value="com.asksven.betterbatterystats.DashClockSettingsActivity" />
+        </service>
+
+    </application>
+
+</manifest>
